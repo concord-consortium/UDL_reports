@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://jnlp.concord.org/dev">
+  <information>
+    <title>UDL</title>
+    <vendor>The Concord Consortium</vendor>
+    <homepage href="http://udl.concord.org"/>
+    <description>Universal Design in Science Education (development site)</description>
+    <icon href="http://udl.concord.org/images/udl-tree-64x64-transparent.png" height="64" width="64"/>
+  </information>
+<security>
+    <all-permissions/>
+  </security>
+<resources os="Mac OS X" arch="ppc i386">
+    <j2se version="1.5" max-heap-size="768m" initial-heap-size="32m"/>
+  </resources>
+<resources os="Mac OS X" arch="x86_64">
+    <j2se version="1.5" max-heap-size="768m" initial-heap-size="32m" java-vm-args="-d32"/>
+  </resources>
+<resources>
+    <j2se version="1.5+" max-heap-size="768m" initial-heap-size="32m"/>
+    <jar href="org/concord/utilities/response-cache/response-cache-0.1.0-20100408.150323-148.jar"/>
+    <jar href="org/concord/jnlp2shell/jnlp2shell-1.0-20100408.150323-325.jar" main="true"/>
+    <property name="vendor" value="ConcordConsortium"/>
+    <property name="product_name" value="UDL"/>
+    <property name="product_version" value="201001.10"/>
+    <property name="not_found_url" value="http://install.diy.concord.org/UDL/201001.10"/>
+    <property name="product_old_versions" value="201001.8,201001.9"/>
+
+  <property name="otrunk.view.author" value="true"/><property name="otrunk.view.hide_tree" value="true"/><property name="otrunk.rest_enabled" value="true"/><property name="report.activity.name" value="Friction (Intermediate)"/><property name="report.class.name" value="ISTE 2010 - Summer 2010"/><property name="otrunk.view.frame_title" value="Universal Design in Science Education"/><property name="report.teacher.name" value="Carolyn Staudt"/></resources>
+<application-desc main-class="org.concord.LaunchJnlp">
+    <argument>http://saildataservice.concord.org/13/offering/9602/config/131301/0/view?sailotrunk.otmlurl=file%3A%2F%2F%2FUsers%2Fnpaessel%2Flab%2Fgit%2FUDL_REPORT%2Freport_data.otml&amp;jnlp_properties=report.class.name%3DISTE%202010%20-%20Summer%202010%26report.teacher.name%3DCarolyn%20Staudt%26report.activity.name%3DFriction%20%28Intermediate%29%26otrunk.view.author%3Dtrue%26otrunk.rest_enabled%3Dtrue%26otrunk.view.hide_tree%3Dtrue%26otrunk.view.frame_title%3DUniversal%20Design%20in%20Science%20Education</argument>
+  </application-desc></jnlp>

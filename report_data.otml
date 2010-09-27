@@ -1,0 +1,934 @@
+<otrunk id="f080c070-7c8a-417c-a3fe-0737a7302806" codebase="file:///Users/npaessel/lab/git/UDL_REPORT">
+	<imports>
+		<import class="org.concord.graph.util.state.OTDrawingTool"/>
+		<import class="org.concord.otrunk.OTSystem"/>
+		<import class="org.concord.otrunk.OTInclude"/>
+		<import class="org.concord.otrunk.OTIncludeRootObject"/>
+		<import class="org.concord.otrunk.view.OTViewBundle"/>
+		<import class="org.concord.otrunk.view.OTViewMode"/>
+		<import class="org.concord.otrunk.view.OTViewEntry"/>
+		<import class="org.concord.otrunk.script.ui.OTXHTMLScriptViewEntry"/>
+		<import class="org.concord.otrunk.view.OTMultiUserRoot"/>
+		<import class="org.concord.otrunk.view.document.OTCompoundDoc"/>
+		<import class="org.concord.otrunk.view.document.OTDocumentViewConfig"/>
+		<import class="org.concord.otrunk.script.ui.OTXHTMLScript"/>
+		<import class="org.concord.otrunk.script.jruby.OTJRuby"/>
+		<import class="org.concord.otrunk.script.OTScriptEngineBundle"/>
+		<import class="org.concord.otrunk.script.OTScriptEngineEntry"/>
+		<import class="org.concord.otrunk.script.ui.OTScriptVariable"/>
+		<import class="org.concord.framework.otrunk.wrapper.OTBlob"/>
+		<import class="org.concord.framework.otrunk.wrapper.OTBoolean"/>
+		<import class="org.concord.framework.otrunk.wrapper.OTInt"/>
+		<import class="org.concord.framework.otrunk.wrapper.OTObjectSet"/>
+		<import class="org.concord.otrunk.view.OTViewChild"/>
+		<import class="org.concord.framework.otrunk.view.OTFrame"/>
+		<import class="org.concord.otrunk.view.prototype.OTPrototypeEventController"/>
+		<import class="org.concord.otrunk.view.prototype.OTPrototypeViewEntry"/>
+		<import class="org.concord.otrunk.view.prototype.OTPrototypeMapEntry"/>
+		<import class="org.concord.otrunk.ui.OTCheckBox"/>
+		<import class="org.concord.otrunk.ui.OTChoice"/>
+		<import class="org.concord.otrunk.ui.OTText"/>
+		<import class="org.concord.otrunk.ui.OTButton"/>
+		<import class="org.concord.otrunk.overlay.OTOverlaySaveAction"/>
+		<import class="org.concord.otrunk.ui.swing.OTUnsetButtonViewConfig"/>
+		<import class="org.concord.otrunk.ui.OTChoicePrototypeController"/>
+		<import class="org.concord.otrunk.ui.swing.OTChoiceViewConfig"/>
+		<import class="org.concord.otrunk.ui.OTIconSwitcherViewConfig"/>
+		<import class="org.concord.otrunk.ui.OTImage"/>
+		<import class="org.concord.otrunk.view.OTGroupListManager"/>
+		<import class="org.concord.otrunk.view.OTGroupMember"/>
+		<import class="org.concord.otrunk.user.OTUserObject"/>
+	</imports>
+	<objects>
+		<OTSystem local_id="system">
+			<includes>
+				<OTInclude href="../UDL/global-imports/udl-view-bundle.otml"/>
+			</includes>
+			<bundles>
+				<!-- include the global udl view bundle -->
+				<object refid="8d880970-c22a-11dc-95ff-0800200c9a66"/>
+				<OTViewBundle showLeftPanel="false">
+					<frame>
+						<OTFrame height="600" width="850"/>
+					</frame>
+					<viewEntries>
+						<OTViewEntry viewClass="org.concord.otrunk.view.OTMultiUserRootView"
+							objectClass="org.concord.otrunk.view.OTMultiUserRoot"/>
+						<OTDocumentViewConfig
+							viewClass="org.concord.otrunk.view.document.OTDocumentView"
+							css="
+							body { background-color:#FFFFFF; color:#333333; font-family:Tahoma,&apos;Trebuchet MS&apos;,sans-serif; line-height:1.5em; }
+              h1 { color:#FFD32C; font-size:1.5em; margin-bottom:0px; }
+              h2 { color:#FFD32C; font-size:1.3em; margin-bottom:0px; }
+              h2 { color:#FFD32C; font-size:1.1em; margin: 2em 0em 1em 0em; }
+              .menu { color: #982f10; background-color: #fffee9;  color: #982f10; margin: 0px 1px; padding: 5px; }
+              .menu_item { background-color: #fffee9; color: #982f10; margin: 1px 0px; padding: 0px 10px; }
+                .menu_item a { color: #51a656; }
+                  .menu_item.selected a { color: #318636; }
+              #navlist ul { margin: 0; padding: 0; list-style: none; width: 150px; }
+              #navlist li { display: inline; list-style-type: none;list-style-type: none; padding-right: 10px; }
+              #content { margin:5px; padding:5px; }
+              "
+							objectClass="org.concord.otrunk.view.document.OTDocument"/>
+						<OTViewEntry viewClass="org.concord.otrunk.ui.swing.OTCheckBoxView"
+							objectClass="org.concord.otrunk.ui.OTCheckBox"/>
+					</viewEntries>
+				</OTViewBundle>
+				<OTScriptEngineBundle>
+					<engines>
+						<OTScriptEngineEntry
+							engineClass="org.concord.otrunk.script.jruby.OTJRubyEngine"
+							objectClass="org.concord.otrunk.script.jruby.OTJRuby"/>
+					</engines>
+				</OTScriptEngineBundle>
+				<OTGroupListManager
+					groupDataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/642c55be-4eaa-4524-b5c4-4377a06b6ec4-data.otml">
+					<userList>
+						<OTGroupMember name="Kayla Andersen"
+							uuid="67fe810e-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8286-data.otml"
+							passwordHash="0ffb5cc0ee5648aa55290f0f89f5f8d8">
+							<userObject>
+								<OTUserObject id="93818ca4-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="karen Bryer"
+							uuid="700e6c24-8472-11df-96fd-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8287-data.otml"
+							passwordHash="af5a71d4e54986ab888728d5336ec8c1">
+							<userObject>
+								<OTUserObject id="93b60a56-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Carla Linfante"
+							uuid="730d78d4-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8284-data.otml"
+							passwordHash="ec121ff80513ae58ed478d5c5787075b">
+							<userObject>
+								<OTUserObject id="86c8872e-8472-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Amy Busey" uuid="7593174e-8472-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8288-data.otml"
+							passwordHash="a5df375d7c972248177e8b4407c8808c">
+							<userObject>
+								<OTUserObject id="93e0e19a-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Erik Jacobsen"
+							uuid="7817d630-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8289-data.otml"
+							passwordHash="72e382f6bd6f19925a7a02d9bd51b29b">
+							<userObject>
+								<OTUserObject id="940adf86-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Jude Kesl" uuid="78accb8c-8472-11df-96fd-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8285-data.otml"
+							passwordHash="1c5749260f7e9ed351a41935428dfc05">
+							<userObject>
+								<OTUserObject id="8fe610d8-8472-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Chris Johnston"
+							uuid="7944c4be-8472-11df-9d22-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8290-data.otml"
+							passwordHash="b93fcd026a8b37d06dc1aa64ceba5dce">
+							<userObject>
+								<OTUserObject id="943f429e-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Sheri Gunville"
+							uuid="80ab7d6a-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8291-data.otml"
+							passwordHash="b93fcd026a8b37d06dc1aa64ceba5dce">
+							<userObject>
+								<OTUserObject id="946755fe-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Amber Jaquez"
+							uuid="821dbc1c-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8292-data.otml"
+							passwordHash="84aa009e180ded31561d390e3713efa2">
+							<userObject>
+								<OTUserObject id="948cbb28-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Wendy Petti"
+							uuid="86750a5e-8472-11df-96fd-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8293-data.otml"
+							passwordHash="7bdc0ab048c74d012c5e6eebfb02438e">
+							<userObject>
+								<OTUserObject id="a38ec7f6-8472-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Bennie Scott"
+							uuid="87e9c9d8-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8294-data.otml"
+							passwordHash="59d0a642bc426012ec1e88884639fbd0">
+							<userObject>
+								<OTUserObject id="a3ca14e6-8472-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="becky cal" uuid="911721d6-8472-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8295-data.otml"
+							passwordHash="2a63cc4aef5193e84c0b1c7d8d2abef5">
+							<userObject>
+								<OTUserObject id="a411d8c6-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Mary-Pat Hulse"
+							uuid="928019e2-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8296-data.otml"
+							passwordHash="76572c661aa0d83ce9107a5d213a0247">
+							<userObject>
+								<OTUserObject id="a4382e0e-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="David Morrow"
+							uuid="93130d10-8472-11df-9d22-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8297-data.otml"
+							passwordHash="37faafdc326a5546a576eb39857c5787">
+							<userObject>
+								<OTUserObject id="a46a11d0-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Lucy Romero"
+							uuid="935f874e-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8298-data.otml"
+							passwordHash="648f2b303957610f39a6a3ae28a37c4e">
+							<userObject>
+								<OTUserObject id="a493f810-8472-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Val Meck" uuid="9d1a3fae-8472-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8299-data.otml"
+							passwordHash="b93fcd026a8b37d06dc1aa64ceba5dce">
+							<userObject>
+								<OTUserObject id="acd165ee-8472-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Christy Post"
+							uuid="9dfddb06-8472-11df-96fd-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8300-data.otml"
+							passwordHash="52e17699cd757e43021c053b456014c6">
+							<userObject>
+								<OTUserObject id="ad028f52-8472-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="marie tribur"
+							uuid="9fe4c150-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8301-data.otml"
+							passwordHash="ec645b03764139b9109a5d84416ffa77">
+							<userObject>
+								<OTUserObject id="ad2966ae-8472-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Teri Romshek"
+							uuid="a2403da8-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8302-data.otml"
+							passwordHash="a227801d58f36337636b35b9305b2169">
+							<userObject>
+								<OTUserObject id="ad4d34a8-8472-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Marlene Lyall"
+							uuid="a45b0cc6-8472-11df-9d22-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8303-data.otml"
+							passwordHash="5f4dcc3b5aa765d61d8327deb882cf99">
+							<userObject>
+								<OTUserObject id="ad7d541c-8472-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="cindy pellerin"
+							uuid="d1416154-8472-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8305-data.otml"
+							passwordHash="52e17699cd757e43021c053b456014c6">
+							<userObject>
+								<OTUserObject id="4b123652-8473-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Jan C" uuid="0ac4eb44-8473-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8306-data.otml"
+							passwordHash="b93fcd026a8b37d06dc1aa64ceba5dce">
+							<userObject>
+								<OTUserObject id="4b3b0a50-8473-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Cathy Buyrn"
+							uuid="58371c08-8473-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8307-data.otml"
+							passwordHash="b93fcd026a8b37d06dc1aa64ceba5dce">
+							<userObject>
+								<OTUserObject id="91acf03e-8473-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="John Wilson"
+							uuid="775b05f4-8473-11df-96fd-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8308-data.otml"
+							passwordHash="b13e4ce4de73a9f585b7c9433bbbbb74">
+							<userObject>
+								<OTUserObject id="93bd1a0c-8473-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Soraya Arteaga"
+							uuid="7cc7d904-8473-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8309-data.otml"
+							passwordHash="ad68fc242f772a3c51ccddbb976652af">
+							<userObject>
+								<OTUserObject id="93e4f810-8473-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="pat knapp" uuid="99409b48-8473-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8310-data.otml"
+							passwordHash="2ccb3dd497d7df8fcf5902323a6189d7">
+							<userObject>
+								<OTUserObject id="d3e8ff9c-8473-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="John Wilson"
+							uuid="a1fb5d0e-8473-11df-96fd-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8311-data.otml"
+							passwordHash="b13e4ce4de73a9f585b7c9433bbbbb74">
+							<userObject>
+								<OTUserObject id="d4115e1a-8473-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Cindy P" uuid="3a69d17e-8474-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8313-data.otml"
+							passwordHash="52e17699cd757e43021c053b456014c6">
+							<userObject>
+								<OTUserObject id="6358def4-8474-11df-9d22-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Soraya Arteaga"
+							uuid="a69057e2-8474-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8314-data.otml"
+							passwordHash="80b40021818c4b2830959ac85312d2fd">
+							<userObject>
+								<OTUserObject id="c04f73c0-8474-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="marie tribur"
+							uuid="c544b570-8474-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8315-data.otml"
+							passwordHash="ec645b03764139b9109a5d84416ffa77">
+							<userObject>
+								<OTUserObject id="efbe7f34-8474-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Deborah Kasberg"
+							uuid="fdc3f014-8474-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8316-data.otml"
+							passwordHash="77f687d5068240e022873fdaae04c240">
+							<userObject>
+								<OTUserObject id="1a048432-8475-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Deborah Kasberg"
+							uuid="3af0a4a0-8475-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8317-data.otml"
+							passwordHash="77f687d5068240e022873fdaae04c240">
+							<userObject>
+								<OTUserObject id="6a664582-8475-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="aaron soto" uuid="4fe70656-8475-11df-96fd-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8318-data.otml"
+							passwordHash="569e57206e1bc2a239c6bd91e0254d0b">
+							<userObject>
+								<OTUserObject id="6a91750e-8475-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Chad Bates" uuid="a433db4e-8475-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8319-data.otml"
+							passwordHash="9a1f30943126974075dbd4d13c8018ac">
+							<userObject>
+								<OTUserObject id="b5412a86-8475-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Karen Clay" uuid="da642dc2-8475-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8320-data.otml"
+							passwordHash="2171e52cf05e6ac95f1462d8a61efba8">
+							<userObject>
+								<OTUserObject id="0257e094-8476-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Susan Faucett"
+							uuid="eca06a3c-8475-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8321-data.otml"
+							passwordHash="ac48bbf05cb267a1ddb41642b28977c0">
+							<userObject>
+								<OTUserObject id="16416de6-8476-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Rochelle Bushey"
+							uuid="7186cf8e-8476-11df-9ad6-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8322-data.otml"
+							passwordHash="b93fcd026a8b37d06dc1aa64ceba5dce">
+							<userObject>
+								<OTUserObject id="8926aba0-8476-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="Amy Woodsmall"
+							uuid="2de5b5a0-8477-11df-9d22-001ec94098a1" isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8323-data.otml"
+							passwordHash="b93fcd026a8b37d06dc1aa64ceba5dce">
+							<userObject>
+								<OTUserObject id="45ab286e-8477-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="RM C" uuid="5551df92-8477-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8324-data.otml"
+							passwordHash="106a6c241b8797f52e1e77317b96a201">
+							<userObject>
+								<OTUserObject id="74b8cfe4-8477-11df-96fd-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+						<OTGroupMember name="RM C" uuid="a63bc6de-8477-11df-9ad6-001ec94098a1"
+							isCurrentUser="false"
+							dataURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/8325-data.otml"
+							passwordHash="106a6c241b8797f52e1e77317b96a201">
+							<userObject>
+								<OTUserObject id="b022bc84-8477-11df-9ad6-001ec94098a1"/>
+							</userObject>
+						</OTGroupMember>
+					</userList>
+				</OTGroupListManager>
+			</bundles>
+			<root>
+				<OTMultiUserRoot reportTemplateViewEntry="${report_unit_view}"
+					groupOverlayURL="http://webdav.diy.concord.org//seymour.concord.org/udl//94/642c55be-4eaa-4524-b5c4-4377a06b6ec4.otml"
+					local_id="multi_user_root">
+					<userList>
+						<!--
+							the local_id is so this can be used as a report template in the
+							DIY example learner data:
+							http://rails.dev.concord.org/udl/external_otrunk_activities/42/ot_learner_data.xml
+							Dummy example learner data:
+							http://rails.dev.concord.org/diy/external_otrunk_activities/25/ot_learner_data
+							More users:
+							http://udl.diy.concord.org/external_otrunk_activities/46/ot_learner_data?users=1242%2C1243%2C1245%2C1246%2C1247%2C1248%2C1249%2C1250%2C1251%2C1252%2C1253%2C1254%2C1255%2C1256%2C1257
+							requires activity:
+							http://svn.concord.org/svn/projects/tags/java/common/otrunk/otrunk-examples/UDL-fresno-08-08-05/udl-clouds-34.otml"
+							local_id="external_activity_url
+						-->
+						<OTIncludeRootObject
+							href="http://udl.diy.concord.org/external_otrunk_activities/94/ot_learner_data?users=3339%2C3340%2C3341%2C3342%2C3343%2C3344%2C3345%2C3346%2C3347%2C3348%2C3349%2C3350%2C3351%2C3352%2C3353%2C3354%2C3355%2C3356%2C3357%2C3358%2C3359%2C3360%2C3362%2C3363%2C3364%2C3365%2C3366%2C3367%2C3368%2C3369%2C3370%2C3371%2C3372%2C3374%2C3375%2C3376%2C3377%2C3378%2C3379%2C3380"
+							local_id="external_user_list_url"/>
+					</userList>
+					<reportTemplate>
+						<OTIncludeRootObject
+							href="http://github.com/concord-consortium/UDL_OTML_2010_09/raw/master/udl-friction-56.otml"
+							local_id="external_activity_url"/>
+					</reportTemplate>
+				</OTMultiUserRoot>
+			</root>
+			<library>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="template_report_view">
+					<script>
+						<OTJRuby src="scripts/udl-multipage-report.rb" local_id="erb_controller"/>
+					</script>
+					<variables>
+						<OTScriptVariable reference="${report_section_view}" name="section_view"/>
+						<OTScriptVariable reference="${report_user_view}" name="user_view"/>
+						<OTScriptVariable reference="${section_enable_view}"
+							name="section_enable_view"/>
+						<OTScriptVariable reference="${glossary_view}" name="glossary_view"/>
+						<OTScriptVariable reference="${glossary_csv_view}" name="glossary_csv_view"/>
+						<OTScriptVariable reference="${tts_view}" name="tts_view"/>
+						<OTScriptVariable reference="${leveled_questions_view}"
+							name="leveled_questions_view"/>
+						<OTScriptVariable reference="${leveled_questions_csv_view}"
+							name="leveled_questions_csv_view"/>
+						<OTScriptVariable reference="${tts_csv_view}" name="tts_csv_view"/>
+						<OTScriptVariable reference="${report_section_csv_view}"
+							name="section_csv_view"/>
+						<OTScriptVariable reference="${question_popup_view}"
+							name="question_popup_view"/>
+						<OTScriptVariable reference="${true}" name="dashboard"/>
+						<OTScriptVariable reference="11444C03-DBC1-4BA3-848D-244D5FAC57B5"
+							name="text_size"/>
+						<OTScriptVariable reference="${text_size_class_view}"
+							name="text_size_class_view"/>
+						<OTScriptVariable reference="${text_size_student_view}"
+							name="text_size_student_view"/>
+						<OTScriptVariable reference="${enable_activities_view}"
+							name="enable_activities_view"/>
+						<OTScriptVariable reference="${unset_enabled_button}"
+							name="unset_enabled_button"/>
+						<OTScriptVariable reference="${udl_parameters_view}"
+							name="udl_parameters_view"/>
+						<OTScriptVariable name="overlay_save_button">
+							<reference>
+								<OTButton text="Save Changes">
+									<action>
+										<OTOverlaySaveAction/>
+									</action>
+								</OTButton>
+							</reference>
+						</OTScriptVariable>
+						<OTScriptVariable reference="c0e33320-e611-11dc-95ff-0800200c9a66"
+							name="question_view_config"/>
+						<OTScriptVariable reference="0d03b9c0-e48a-11dc-95ff-0800200c9a66"
+							name="document_view_config"/>
+						<OTScriptVariable reference="${lock_scaffolding_student_view}"
+							name="lock_scaffolding_student_view"/>
+						<OTScriptVariable reference="${lock_scaffolding_class_view}"
+							name="lock_scaffolding_class_view"/>
+						<OTScriptVariable reference="${scaffolding_level_student_view}"
+							name="scaffolding_level_student_view"/>
+						<OTScriptVariable reference="${scaffolding_level_class_view}"
+							name="scaffolding_level_class_view"/>
+						<OTScriptVariable reference="${enabled_icon_class_view}"
+							name="enabled_icon_class_view"/>
+						<OTScriptVariable reference="${enabled_icon_student_view}"
+							name="enabled_icon_student_view"/>
+						<OTScriptVariable reference="11444C03-DBC1-4BA3-848D-244D5FAC57B5"
+							name="text_size_overlay_group"/>
+						<OTScriptVariable reference="${overlay_sync_view}" name="overlay_sync_view"/>
+						<OTScriptVariable reference="b57a5366-e0c3-480a-b173-5b6860458d1d"
+							name="glossary"/>
+						<OTScriptVariable reference="${allowed_to_view_all_class_view}"
+							name="allowed_to_view_all_class_view"/>
+						<OTScriptVariable reference="${allowed_to_view_all_student_view}"
+							name="allowed_to_view_all_student_view"/>
+						<OTScriptVariable reference="${path_view_for_class}"
+							name="path_view_for_class"/>
+						<OTScriptVariable reference="${path_view_for_student}"
+							name="path_view_for_student"/>
+						<OTScriptVariable reference="${tts_view_for_class}"
+							name="tts_view_for_class"/>
+						<OTScriptVariable reference="${tts_view_for_student}"
+							name="tts_view_for_student"/>
+
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject" local_id="report_unit_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/summary.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="report_section_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/section.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="report_section_csv_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/section-csv.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject" local_id="report_user_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/user.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="enable_activities_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/enable-activities.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="udl_parameters_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/udl-parameters.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="question_popup_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/question-view.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject" local_id="glossary_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/glossary-view.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject" local_id="glossary_csv_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/glossary-csv-view.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject" local_id="tts_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/tts-view.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject" local_id="tts_csv_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/tts-csv-view.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="leveled_questions_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/leveled-questions-view.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTXHTMLScriptViewEntry viewClass="org.concord.otrunk.script.ui.OTXHTMLScriptView"
+					template="${template_report_view}"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="leveled_questions_csv_view">
+					<variables>
+						<OTScriptVariable name="template">
+							<reference>
+								<OTBlob src="templates/leveled-questions-csv-view.html.erb"/>
+							</reference>
+						</OTScriptVariable>
+					</variables>
+				</OTXHTMLScriptViewEntry>
+				<OTPrototypeViewEntry viewClass="org.concord.otrunk.view.prototype.OTPrototypeView"
+					savePrototypeCopies="false" objectClass="org.concord.otrunk.udl3.OTUDLSection"
+					local_id="section_enable_view">
+					<prototype>
+						<OTCheckBox selected="false"/>
+					</prototype>
+					<controller>
+						<OTPrototypeEventController>
+							<mapping>
+								<OTPrototypeMapEntry prototypeProperty="selected"
+									modelProperty="enabled"/>
+							</mapping>
+						</OTPrototypeEventController>
+					</controller>
+				</OTPrototypeViewEntry>
+				<OTIconSwitcherViewConfig showUnset="false"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="overlays"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="text_size_class_view">
+					<icons>
+						<OTImage imageBytes="images/fontsizeup.png"/>
+						<OTImage imageBytes="images/fontsizenormal.png"/>
+						<OTImage imageBytes="images/fontsizedown.png"/>
+					</icons>
+					<values>
+						<OTObjectSet name="large">
+							<objects>
+								<object refid="7ba31210-c44e-11dc-95ff-0800200c9a66"/>
+							</objects>
+						</OTObjectSet>
+						<OTObjectSet name="medium">
+							<objects>
+								<object refid="6cc8e2b0-c44e-11dc-95ff-0800200c9a66"/>
+							</objects>
+						</OTObjectSet>
+						<OTObjectSet name="small">
+							<objects>
+								<object refid="da41a2a0-c44e-11dc-95ff-0800200c9a66"/>
+							</objects>
+						</OTObjectSet>
+					</values>
+				</OTIconSwitcherViewConfig>
+				<OTIconSwitcherViewConfig forOverlay="true"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="overlays"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="text_size_student_view">
+					<icons>
+						<OTImage imageBytes="images/fontsizeup.png"/>
+						<OTImage imageBytes="images/fontsizenormal.png"/>
+						<OTImage imageBytes="images/fontsizedown.png"/>
+					</icons>
+					<values>
+						<OTObjectSet name="large">
+							<objects>
+								<object refid="7ba31210-c44e-11dc-95ff-0800200c9a66"/>
+							</objects>
+						</OTObjectSet>
+						<OTObjectSet name="medium">
+							<objects>
+								<object refid="6cc8e2b0-c44e-11dc-95ff-0800200c9a66"/>
+							</objects>
+						</OTObjectSet>
+						<OTObjectSet name="small">
+							<objects>
+								<object refid="da41a2a0-c44e-11dc-95ff-0800200c9a66"/>
+							</objects>
+						</OTObjectSet>
+					</values>
+				</OTIconSwitcherViewConfig>
+				<OTIconSwitcherViewConfig showUnset="false"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="isLevelFrozen"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="lock_scaffolding_class_view">
+					<icons>
+						<OTImage imageBytes="images/halfencrypted.png"/>
+						<OTImage imageBytes="images/unlock.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Locked" value="true"/>
+						<OTBoolean name="Unlocked" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+				<OTIconSwitcherViewConfig forOverlay="true"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="isLevelFrozen"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="lock_scaffolding_student_view">
+					<icons>
+						<OTImage imageBytes="images/halfencrypted.png"/>
+						<OTImage imageBytes="images/unlock.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Locked" value="true"/>
+						<OTBoolean name="Unlocked" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+				<OTPrototypeViewEntry viewClass="org.concord.otrunk.view.prototype.OTPrototypeView"
+					copyDepth="0" viewEntry="${combobox_view}" savePrototypeCopies="false"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="scaffolding_level_student_view">
+					<prototype>
+						<OTChoice>
+							<choices>
+								<OTText name="Class Setting"
+									local_id="scaffolding_level_class_setting"/>
+								<OTInt name="1 least scaffolding" value="0"/>
+								<OTInt name="2" value="1"/>
+								<OTInt name="3" value="2"/>
+								<OTInt name="4" value="3"/>
+								<OTInt name="5 most scaffolding" value="4"/>
+							</choices>
+						</OTChoice>
+					</prototype>
+					<controller>
+						<OTChoicePrototypeController forOverlay="true"
+							modelProperty="defaultScaffoldLevel"
+							unsetChoice="${scaffolding_level_class_setting}"/>
+					</controller>
+				</OTPrototypeViewEntry>
+				<OTPrototypeViewEntry viewClass="org.concord.otrunk.view.prototype.OTPrototypeView"
+					copyDepth="0" viewEntry="${combobox_view}" savePrototypeCopies="false"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="scaffolding_level_class_view">
+					<prototype>
+						<OTChoice>
+							<choices>
+								<OTInt name="1 least scaffolding" value="0"/>
+								<OTInt name="2" value="1"/>
+								<OTInt name="3" value="2"/>
+								<OTInt name="4" value="3"/>
+								<OTInt name="5 most scaffolding" value="4"/>
+							</choices>
+						</OTChoice>
+					</prototype>
+					<controller>
+						<OTChoicePrototypeController modelProperty="defaultScaffoldLevel"/>
+					</controller>
+				</OTPrototypeViewEntry>
+
+				<!-- Configuration for Glossary behavior -->
+				<OTIconSwitcherViewConfig showUnset="false"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView"
+					property="isAllowedToViewAll"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="allowed_to_view_all_class_view">
+					<icons>
+						<OTImage imageBytes="images/ok.png"/>
+						<OTImage imageBytes="images/cancel.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Enabled" value="true"/>
+						<OTBoolean name="Disabled" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+
+				<OTIconSwitcherViewConfig forOverlay="true"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView"
+					property="isAllowedToViewAll"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="allowed_to_view_all_student_view">
+					<icons>
+						<OTImage imageBytes="images/ok.png"/>
+						<OTImage imageBytes="images/cancel.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Enabled" value="true"/>
+						<OTBoolean name="Disabled" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+
+				<OTIconSwitcherViewConfig showUnset="false"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="usePath"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="path_view_for_class">
+					<icons>
+						<OTImage imageBytes="images/ok.png"/>
+						<OTImage imageBytes="images/cancel.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Enabled" value="true"/>
+						<OTBoolean name="Disabled" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+
+				<OTIconSwitcherViewConfig forOverlay="true"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="usePath"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="path_view_for_student">
+					<icons>
+						<OTImage imageBytes="images/ok.png"/>
+						<OTImage imageBytes="images/cancel.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Enabled" value="true"/>
+						<OTBoolean name="Disabled" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+
+				<OTIconSwitcherViewConfig showUnset="false"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="enableTTS"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="tts_view_for_class">
+					<icons>
+						<OTImage imageBytes="images/ok.png"/>
+						<OTImage imageBytes="images/cancel.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Enabled" value="true"/>
+						<OTBoolean name="Disabled" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+
+				<OTIconSwitcherViewConfig forOverlay="true"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="enableTTS"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="tts_view_for_student">
+					<icons>
+						<OTImage imageBytes="images/ok.png"/>
+						<OTImage imageBytes="images/cancel.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Enabled" value="true"/>
+						<OTBoolean name="Disabled" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+
+
+				<OTIconSwitcherViewConfig showUnset="false"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="enabled"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="enabled_icon_class_view">
+					<icons>
+						<OTImage imageBytes="images/ok.png"/>
+						<OTImage imageBytes="images/cancel.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Enabled" value="true"/>
+						<OTBoolean name="Disabled" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+				<OTIconSwitcherViewConfig forOverlay="true"
+					viewClass="org.concord.otrunk.ui.OTIconSwitcherView" property="enabled"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="enabled_icon_student_view">
+					<icons>
+						<OTImage imageBytes="images/ok.png"/>
+						<OTImage imageBytes="images/cancel.png"/>
+					</icons>
+					<values>
+						<OTBoolean name="Enabled" value="true"/>
+						<OTBoolean name="Disabled" value="false"/>
+					</values>
+				</OTIconSwitcherViewConfig>
+				<OTUnsetButtonViewConfig forOverlay="true"
+					viewClass="org.concord.otrunk.ui.swing.OTUnsetButtonView" property="enabled"
+					objectClass="org.concord.framework.otrunk.OTObject"
+					local_id="unset_enabled_button"/>
+				<OTChoiceViewConfig viewClass="org.concord.otrunk.ui.swing.OTChoiceComboBoxView"
+					objectClass="org.concord.otrunk.ui.OTChoice" local_id="combobox_view"/>
+				<OTViewEntry viewClass="org.concord.otrunk.overlay.OTOverlaySyncView"
+					objectClass="org.concord.framework.otrunk.OTObject" local_id="overlay_sync_view"/>
+				<OTBoolean value="true" local_id="true"/>
+			</library>
+		</OTSystem>
+	</objects>
+</otrunk>

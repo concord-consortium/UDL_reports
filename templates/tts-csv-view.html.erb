@@ -1,0 +1,54 @@
+<div class="menu">
+  <table>
+    <tr>
+      <td><div class="menu_item"><%= linkToUnitPage "Unit Summary" %></div></td>
+      <td><div class="menu_item"><%= linkToObject "Back to TTS", activityRoot(), $tts_view %></div></td>
+    </tr>
+  </table>
+</div>
+<hr />
+
+  <h2>Text-to-speech</h2>
+
+  <% 
+	text = ''
+	sep = '|'
+	ttsTotals = []
+	sections = unitSections() 
+	
+	text += sep
+	sections.each do |section|
+		text += section.name + sep
+	end
+	text += "TOTAL" + "\n"
+	    
+	@users.each do |user|
+		userTotal = 0
+		user_name = user.name
+	    	if user_name == nil or user_name.empty? then user_name = "blank" 
+	    end
+	    text +=user_name + sep
+	    
+	    sections.each_with_index do |section, i|
+	    	tts = ttsInstances(section, user)
+	    	text += tts.to_s + sep
+	    	userTotal += tts
+	    	ttsTotals[i] ||= 0
+	    	ttsTotals[i] += tts
+	   	end
+	    text += userTotal.to_s + "\n"
+	end
+	
+	text += "TOTAL" + sep
+	ttsTotals.each do |total|
+		text += total.to_s + sep
+	end
+  %>
+ 
+<p/>
+<h3>Text-to-speech instances for <%= unitTitle %></h3>
+<pre>
+<%=text%>
+</pre>
+
+  

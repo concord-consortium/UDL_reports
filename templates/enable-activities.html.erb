@@ -1,0 +1,50 @@
+<div class="menu">
+  <table>
+    <tr>
+      <td><div class="menu_item"><%= linkToUnitPage "Unit Summary" %></div></td>
+      <% if $dashboard %>
+	    <td><%= embedObject $overlay_save_button %></td>
+	  <% end %>
+    </tr>
+  </table>
+</div>
+<hr />
+<div id="content">
+  
+  <h2>Enable Activities for <%= unitTitle %></h2>
+
+  <% activities = unitActivities() %>
+     
+  <table>
+    <tr>
+     <th></th>
+     <% activities.each do |section| %>
+      <th><%= linkToObject section.name, section, $section_view %></th>  
+     <% end %>
+    </tr>
+    <tr>
+     <td>Enabled for Class</td>
+     <% activities.each do |section| %>
+      <td style="text-align: center">
+        <%= embedObjectFromUserOverlay nil, section, $enabled_icon_class_view %>  
+      </td>
+     <% end %>
+    </tr> 
+    <% line_toggle = true %>
+    <% @users.each do |user| %>
+    <tr BGCOLOR = <%= line_toggle ? ROWCOLOR1 : ROWCOLOR2 %>>
+      <% line_toggle = !line_toggle %>
+        <% user_name = user.name
+           if user_name == nil or user_name.empty? then user_name = "blank" end
+         %>
+        <td><%= linkToObject user_name, user, $user_view %></td>
+       <% activities.each do |section| %>
+        <td style="text-align: center">
+          <%= embedObjectFromUserOverlay user, section, $enabled_icon_student_view %>
+        </td> 
+       <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= embedObject $model, $overlay_sync_view %>
+</div>

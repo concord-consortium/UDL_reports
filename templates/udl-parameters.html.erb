@@ -1,0 +1,52 @@
+<div class="menu">
+  <table>
+    <tr>
+      <td><div class="menu_item"><%= linkToUnitPage "Unit Summary" %></div></td>
+      <% if $dashboard %>
+	    <td><%= embedObject $overlay_save_button %></td>
+	  <% end %>
+    </tr>
+  </table>
+</div>
+<hr />
+<div id="content">
+  
+  <h2>Report for <%= unitTitle %></h2>
+
+  
+  <table width="100%">
+  <tr>
+  <td><td><th>Font</th><th>Language</th><th>Lock Scaffolding</th><th>Initial Scaffolding Level</th><th>Show All Definitions</th><th>Enforce order of activities</th><th>Enable text-to-speech</th>
+  </tr>
+  <tr>
+    <td>Class Defaults<td>
+    <td style="text-align: center"><%= embedObjectFromUserOverlay nil, $text_size, $text_size_class_view %></td>
+    <td>(language disabled)</td>
+    <td style="text-align: center"><%= embedObjectFromUserOverlay nil, $question_view_config, $lock_scaffolding_class_view %></td>
+    <td style="text-align: center"><%= embedObjectFromUserOverlay nil, $question_view_config, $scaffolding_level_class_view %></td>
+    <td style="text-align: center"><%= embedObjectFromUserOverlay nil, $glossary, $allowed_to_view_all_class_view %></td>
+    <td style="text-align: center"><%= embedObjectFromUserOverlay nil, activityRoot(), $path_view_for_class %></td>
+    <td style="text-align: center"><%= embedObjectFromUserOverlay nil, $document_view_config, $tts_view_for_class %></td>
+  </tr>
+  
+  <% @users.each do |user| %>
+    <% user_name = user.name
+        if user_name == nil or user_name.empty? then user_name = "blank" end
+     %>
+     <tr>
+       <td><%= linkToObject user_name, user, $user_view %><td/>
+       <td style="text-align: center"><%= embedObjectFromUserOverlay user, $text_size, $text_size_student_view %></td>
+       <td>(language disabled)</td>
+       <td style="text-align: center"><%= embedObjectFromUserOverlay user, $question_view_config, $lock_scaffolding_student_view %></td>
+       <td style="text-align: center"><%= embedObjectFromUserOverlay user, $question_view_config, $scaffolding_level_student_view %></td>   
+       <td style="text-align: center"><%= embedObjectFromUserOverlay user, $glossary, $allowed_to_view_all_student_view %></td>
+       <td style="text-align: center"><%= embedObjectFromUserOverlay user, activityRoot(), $path_view_for_student %></td>
+       <td style="text-align: center"><%= embedObjectFromUserOverlay user, $document_view_config, $tts_view_for_student %></td>
+     </tr>   
+  <% end %>
+
+  </table>
+    
+  <%= embedObject $model, $overlay_sync_view %>
+  
+</div>
