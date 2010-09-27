@@ -16,3 +16,6 @@ It was forked from subversion:
 For more information on Universal Design in Science Education see [The UDL website](http://udl.concord.org/)
 
 For more information about OTML see the [otrunk faq](http://confluence.concord.org/display/CSP/OTrunk+HowTo)
+
+in production: [Report templates directory](http://otrunk.concord.org/udl_reports_2010/)
+in production: [Authored OTML](http://otrunk.concord.org/udl_otml_2010)
