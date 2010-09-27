@@ -430,7 +430,7 @@
 					</userList>
 					<reportTemplate>
 						<OTIncludeRootObject
-							href="http://github.com/concord-consortium/UDL_OTML_2010_09/raw/master/udl-friction-56.otml"
+							href="http://otrunk.concord.org/UDL/udl-friction-56.otml"
 							local_id="external_activity_url"/>
 					</reportTemplate>
 				</OTMultiUserRoot>
