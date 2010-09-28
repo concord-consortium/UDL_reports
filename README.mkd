@@ -5,8 +5,9 @@
 
 This is repo contains Report resources for the September 2010 release of UDL.
 
-This content is a fork of January content found in subversion here:
+It is hosted on [github](http://github.com/concord-consortium/UDL_reports)
 
+ <code> git clone git@github.com:concord-consortium/UDL_reports.git </code>
 
 It was forked from subversion:
 
