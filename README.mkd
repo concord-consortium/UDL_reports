@@ -13,6 +13,7 @@ It was forked from subversion:
 
 * [http://svn.concord.org/svn/projects/trunk/common/java/otrunk/otrunk-examples/UDLReport](http://svn.concord.org/svn/projects/trunk/common/java/otrunk/otrunk-examples/UDLReport)
 
+It automatigically updates: [http://otrunk.concord.org/udl_reports_2010/udl-multipage-report.otml](http://otrunk.concord.org/udl_reports_2010/udl-multipage-report.otml)
 
 For more information on Universal Design in Science Education see [The UDL website](http://udl.concord.org/)
 
